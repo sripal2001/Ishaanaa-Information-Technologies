@@ -561,12 +561,9 @@ img {
     .footer-content { flex-direction: column; text-align: center; }
 
     /* ── MOBILE NAV ── */
-
-    /* Logo smaller so hamburger has room */
     .brand-logo { height: 48px; }
     .navbar.scrolled .brand-logo { height: 44px; }
 
-    /* Always show a solid navbar background so lines are visible */
     .navbar {
         background: rgba(245, 245, 246, 0.98) !important;
         backdrop-filter: blur(10px);
@@ -574,45 +571,42 @@ img {
         padding: 14px 0;
     }
 
-    /* Show the hamburger */
     .hamburger {
         display: flex !important;
     }
 
-    /* Hide desktop nav links (off screen to the right) */
     .nav-links {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #ffffff;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 48px;
-        /* Hidden via opacity/visibility — NOT transform/right, avoids overflow clipping */
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        z-index: 9998;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 48px !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transition: opacity 0.3s ease, visibility 0.3s ease !important;
+        z-index: 9998 !important;
+        display: flex !important;
+        transform: none !important;
     }
 
-    /* Shown when active */
     .nav-links.active {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: all;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: all !important;
     }
 
     .nav-links li a {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #0B1C48;
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: #0B1C48 !important;
     }
 
-    /* Hamburger → X */
     .hamburger.active .line:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
     .hamburger.active .line:nth-child(2) { opacity: 0; }
     .hamburger.active .line:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
