@@ -156,7 +156,7 @@ img {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 9999;
     padding: 20px 0;
     transition: all var(--transition-normal);
 }
@@ -177,6 +177,7 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative; /* Needed for child z-index to work correctly */
 }
 
 .logo {
@@ -224,12 +225,15 @@ img {
 .hamburger {
     display: none;
     cursor: pointer;
+    z-index: 1001; /* Ensure above mobile menu */
+    position: relative; /* Needed for z-index to work */
+    flex-shrink: 0; /* Prevent hamburger from being squished by logo */
 }
 
 .hamburger .line {
     width: 25px;
     height: 2px;
-    background-color: var(--text);
+    background-color: var(--primary); /* Force visibility */
     margin: 5px 0;
     transition: all var(--transition-fast);
 }
@@ -757,44 +761,76 @@ img {
     .brand-logo { height: 80px; }
     .navbar.scrolled .brand-logo { height: 60px; }
     
+    /* Give navbar a background on mobile so hamburger lines always contrast */
+    .navbar {
+        background: rgba(245, 245, 246, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    
     .timeline-step::after { display: none !important; }
     .timeline-step { display: flex; text-align: left; gap: 24px; align-items: flex-start; }
     .step-circle { margin: 0; flex-shrink: 0; width: 48px; height: 48px; font-size: 1.2rem; }
     
     .cta-box h2 { font-size: 2.2rem; }
 
-    /* Mobile Nav */
+    /* Mobile Nav Container Fixes */
+    .nav-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 5% !important;
+        width: 100%;
+        flex-wrap: nowrap !important;
+    }
+    
+    .logo {
+        flex: 0 0 auto;
+        z-index: 10001;
+    }
+
     .hamburger { 
-        display: flex; 
-        flex-direction: column;
-        justify-content: space-around;
-        width: 30px;
-        height: 25px;
-        z-index: 1001; /* Ensure above mobile menu */
+        display: flex !important; 
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        width: 32px !important;
+        height: 22px !important;
+        z-index: 10001 !important; /* Ensure above mobile menu */
+        cursor: pointer;
+        flex: 0 0 auto;
+        position: relative;
+    }
+    
+    .hamburger .line {
+        width: 100% !important;
+        height: 3px !important;
+        background-color: #000000 !important;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        display: block !important;
     }
     
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 100vw; /* Full width on smaller screens */
-        max-width: 400px; /* Cap width for slightly larger mobile */
+        right: -100vw; /* Push fully off-screen */
+        width: 100vw;
+        max-width: 100vw; /* Take over the whole screen */
         height: 100vh;
-        background: var(--glass-bg-white);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: var(--white);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 30px; /* Add spacing between links */
+        gap: 40px;
         transition: right var(--transition-normal);
-        border-left: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow);
+        border-left: none;
+        box-shadow: none;
         z-index: 1000;
     }
     
     .nav-links li a {
-        font-size: 1.2rem; /* Larger touch targets */
+        font-size: 1.5rem; /* Make easily tappable */
+        color: var(--primary); 
     }
 
     .nav-links.active { right: 0; }
@@ -826,48 +862,7 @@ img {
     .cta-box { padding: 40px 20px; }
     .cta-box h2 { font-size: 1.8rem; }
     .section-title h2 { font-size: 2rem; }
-    .brand-logo { height: 60px; }
-    .navbar.scrolled .brand-logo { height: 50px; }
+    .brand-logo { height: 50px; }
+    .navbar.scrolled .brand-logo { height: 44px; }
     .btn { padding: 12px 24px; font-size: 0.95rem; }
-}
-/* Hamburger menu */
-
-.hamburger{
-display:none;
-cursor:pointer;
-}
-
-.hamburger .line{
-width:25px;
-height:3px;
-background:#0B1C48;
-margin:5px;
-}
-
-/* Mobile menu */
-
-@media (max-width:768px){
-
-.nav-links{
-position:absolute;
-top:70px;
-left:0;
-width:100%;
-background:white;
-flex-direction:column;
-align-items:center;
-max-height:0;
-overflow:hidden;
-transition:0.3s ease;
-}
-
-.nav-links.active{
-max-height:300px;
-padding:20px 0;
-}
-
-.hamburger{
-display:block;
-}
-
 }
