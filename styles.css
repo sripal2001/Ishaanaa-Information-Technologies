@@ -811,11 +811,12 @@ img {
     }
     
     .nav-links {
+        display: flex !important; /* Must be explicitly set so it's never hidden */
         position: fixed;
         top: 0;
         right: -100vw; /* Push fully off-screen */
         width: 100vw;
-        max-width: 100vw; /* Take over the whole screen */
+        max-width: 100vw;
         height: 100vh;
         background: var(--white);
         flex-direction: column;
@@ -825,7 +826,7 @@ img {
         transition: right var(--transition-normal);
         border-left: none;
         box-shadow: none;
-        z-index: 1000;
+        z-index: 10000; /* Must be above navbar (9999) but below hamburger (10001) */
     }
     
     .nav-links li a {
