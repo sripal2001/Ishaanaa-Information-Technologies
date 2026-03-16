@@ -830,3 +830,44 @@ img {
     .navbar.scrolled .brand-logo { height: 50px; }
     .btn { padding: 12px 24px; font-size: 0.95rem; }
 }
+/* Hamburger menu */
+
+.hamburger{
+display:none;
+cursor:pointer;
+}
+
+.hamburger .line{
+width:25px;
+height:3px;
+background:#0B1C48;
+margin:5px;
+}
+
+/* Mobile menu */
+
+@media (max-width:768px){
+
+.nav-links{
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:white;
+flex-direction:column;
+align-items:center;
+max-height:0;
+overflow:hidden;
+transition:0.3s ease;
+}
+
+.nav-links.active{
+max-height:300px;
+padding:20px 0;
+}
+
+.hamburger{
+display:block;
+}
+
+}
