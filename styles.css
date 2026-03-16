@@ -31,6 +31,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Here instead of body — won't clip position:fixed children */
 }
 
 body {
@@ -40,7 +41,7 @@ body {
     color: var(--text);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    overflow-x: hidden;
+    /* overflow-x removed from body — it breaks position:fixed on mobile browsers */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -811,10 +812,11 @@ img {
     }
     
     .nav-links {
-        display: flex !important; /* Must be explicitly set so it's never hidden */
+        display: flex !important;
         position: fixed;
         top: 0;
-        right: -100vw; /* Push fully off-screen */
+        right: 0;
+        transform: translateX(100%); /* Use transform instead of right — works with overflow:hidden */
         width: 100vw;
         max-width: 100vw;
         height: 100vh;
@@ -823,10 +825,10 @@ img {
         justify-content: center;
         align-items: center;
         gap: 40px;
-        transition: right var(--transition-normal);
+        transition: transform var(--transition-normal);
         border-left: none;
         box-shadow: none;
-        z-index: 10000; /* Must be above navbar (9999) but below hamburger (10001) */
+        z-index: 10000;
     }
     
     .nav-links li a {
@@ -834,7 +836,7 @@ img {
         color: var(--primary); 
     }
 
-    .nav-links.active { right: 0; }
+    .nav-links.active { transform: translateX(0); }
     
     .hamburger.active .line:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
